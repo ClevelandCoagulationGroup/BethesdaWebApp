@@ -8,7 +8,7 @@ body
     width:1000px;
 }
 
-input
+#dilutions_table input
 {
     width:4em;
 }
@@ -38,4 +38,9 @@ tr.selected
 tr.selected input
 {
     font-weight: bold;
+}
+
+#testsuccessstatus
+{
+    color: gray;
 }

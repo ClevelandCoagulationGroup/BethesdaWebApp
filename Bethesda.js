@@ -56,12 +56,22 @@ window.addEventListener('load', function () {
         }
     }
 
+    function clearInputs() {
+        var i;
+        controlElem.value = '';
+        for (i = 0; i < dilutions.length; ++i) {
+            dilElems[i].value = '';
+        }
+        updateResults();
+    }
+
+    // initialization
     (function () {
         // locate all of the elements
         var i;
 
         controlElem = document.getElementById('control');
-        controlElem.value = '';
+        controlElem.oninput = updateResults;
 
         sampleBUElem = document.getElementById('sampleBU');
 
@@ -70,7 +80,6 @@ window.addEventListener('load', function () {
             dilElem = document.getElementById('dil' + dilutions[i]);
             dilElem.oninput = updateResults;
             dilElems.push(dilElem);
-            dilElem.value = '';
 
             raElem = document.getElementById('ra' + dilutions[i]);
             raElems.push(raElem);
@@ -78,10 +87,58 @@ window.addEventListener('load', function () {
             dilRow = document.getElementById('row' + dilutions[i]);
             dilRows.push(dilRow);
         }
-    })();
-    updateResults();
 
-    controlElem.oninput = updateResults;
+        clearInputs();
+    })();
+
+    function runTests() {
+        var i, j, testcases, numFailures, testStartTime;
+
+        testStartTime = new Date();
+
+        testcases = [
+            { control:  22, dilutions: [   0,   0, 0.1,   3,   6,  11,  14,  16,  20,  23,  22], sampleBU: "32.00" },
+            { control:  28, dilutions: [   0,   0, 0.1,   3,   6,  11,  14,  16,  20,  23,  22], sampleBU: "64.00" }
+        ];
+
+        document.getElementById("testing").hidden = false;
+        document.getElementById("loading").hidden = true;
+
+        numFailures = 0;
+
+        for (i = 0; i < testcases.length; ++i) {
+            controlElem.value = testcases[i].control;
+            for (j = 0; j < dilutions.length; ++j) {
+                dilElems[j].value = testcases[i].dilutions[j];
+            }
+
+            updateResults();
+            if (sampleBUElem.innerHTML !== testcases[i].sampleBU) {
+                ++numFailures;
+                console.log("Test " + i + " failed - expected \"" +
+                        testcases[i].sampleBU + "\", got \"" +
+                        sampleBUElem.innerHTML + "\"");
+            }
+        }
+
+        document.getElementById("teststatus").innerHTML = numFailures + " / " +
+            testcases.length + " tests failed.";
+
+        if (numFailures == 0) {
+            document.getElementById("testsuccessstatus").innerHTML = (
+                    "All " +
+                    testcases.length + " self tests passed " +
+                    testStartTime)
+            document.getElementById("mainform").hidden = false;
+        } else {
+            document.getElementById("testsfailed").hidden = false;
+        }
+        document.getElementById("testing").hidden = true;
+
+        clearInputs();
+   }
+
+   runTests();
 
 }, false);
 

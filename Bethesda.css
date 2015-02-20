@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+body
+{
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:1cm;
+    width:1000px;
+}
+
+input
+{
+    width:4em;
+}
+
+td input
+{
+    text-align: center;
+}
+
+th {
+    padding-bottom:1ex;
+}
+
+td
+{
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+tr.selected
+{
+    background: #DFDFDF;
+    font-weight: bold;
+}
+
+tr.selected input
+{
+    font-weight: bold;
+}

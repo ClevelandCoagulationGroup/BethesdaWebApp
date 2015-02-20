@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Worksheet for Bethesda Assay</title>
+<link rel="stylesheet" href="Bethesda.css" />
+<script src="Bethesda.js"></script>
+</head>
+<body>
+</body>
+
+<table id="dilutions_table">
+    <tr><th>Dilution</th><th>Activity</th><th>% Residual Activity</th></tr>
+    <tr id="rowcontrol"><td>Control</td><td><input type="text" id="control"/></td><td>100%</td></tr>
+    <tr id="row1"><td class="dilution">1:1</td><td><input type="text" id="dil1"/></td><td><div id="ra1"/></td></tr>
+    <tr id="row2"><td class="dilution">1:2</td><td><input type="text" id="dil2"/></td><td><div id="ra2"/></td></tr>
+    <tr id="row4"><td class="dilution">1:4</td><td><input type="text" id="dil4"/></td><td><div id="ra4"/></td></tr>
+    <tr id="row8"><td class="dilution">1:8</td><td><input type="text" id="dil8"/></td><td><div id="ra8"/></td></tr>
+    <tr id="row16"><td class="dilution">1:16</td><td><input type="text" id="dil16"/></td><td><div id="ra16"/></td></tr>
+    <tr id="row32"><td class="dilution">1:32</td><td><input type="text" id="dil32"/></td><td><div id="ra32"/></td></tr>
+    <tr id="row64"><td class="dilution">1:64</td><td><input type="text" id="dil64"/></td><td><div id="ra64"/></td></tr>
+    <tr id="row128"><td class="dilution">1:128</td><td><input type="text" id="dil128"/></td><td><div id="ra128"/></td></tr>
+    <tr id="row256"><td class="dilution">1:256</td><td><input type="text" id="dil256"/></td><td><div id="ra256"/></td></tr>
+    <tr id="row512"><td class="dilution">1:512</td><td><input type="text" id="dil512"/></td><td><div id="ra512"/></td></tr>
+    <tr id="row1024"><td class="dilution">1:1024</td><td><input type="text" id="dil1024"/></td><td><div id="ra1024"/></td></tr>
+</table>
+
+<p>Sample Bethesda Units: <span id="sampleBU"/></p>
+</html>

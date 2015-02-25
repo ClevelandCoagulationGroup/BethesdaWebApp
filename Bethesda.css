@@ -1,11 +1,30 @@
 @charset "UTF-8";
 
-body
+/*body
 {
     margin-right:auto;
     margin-left:auto;
     margin-top:1cm;
     width:1000px;
+}*/
+
+body {
+    background-color: #506080;
+    background-image: linear-gradient(88deg, #607090, #506080 200px, #202040 1500px, #101020);
+    background-position: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.mainColumn {
+    max-width: 210mm;
+    min-width: 300px;
+    margin: 0px auto;
+    background-color: white;
+    background-image: linear-gradient(90deg, #FFFFF8, #FCFCFC 70%, #F8F8FF);
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 60px;
 }
 
 #dilutions_table input
@@ -14,7 +33,8 @@ body
 }
 
 table {
-    border-collapse: collapse
+    border-collapse: collapse;
+    background-color: white;
 }
 
 td input
@@ -34,8 +54,6 @@ td
 {
     border: 1px solid #DFDFDF;
     text-align: center;
-    padding-left: 1em;
-    padding-right: 1em;
 }
 
 tr.selected
@@ -57,4 +75,9 @@ tr.selected input
 #testsuccessstatus:hover
 {
     color: black;
+}
+
+#self_test_table
+{
+    border: 5px solid #DFDFDF;
 }

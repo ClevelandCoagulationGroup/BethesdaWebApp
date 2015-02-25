@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifestx="Bethesda.manifest">
 <head>
 <meta charset="utf-8" />
 <title>Worksheet for Bethesda Assay</title>
@@ -35,8 +35,29 @@
         <tr id="row512"><td class="dilution">1:512</td><td><input type="text" id="dil512"/></td><td><div id="ra512"/></td></tr>
         <tr id="row1024"><td class="dilution">1:1024</td><td><input type="text" id="dil1024"/></td><td><div id="ra1024"/></td></tr>
     </table>
-
     <p>Sample Bethesda Units: <span id="sampleBU"/></p>
-    <div id="testsuccessstatus"/>
-<div>
+</div>
+
+<span id="testsuccessstatus"></span>
+<table id="self_test_table" hidden="true">
+    <tr><th colspan="12">Activity</th>
+        <th colspan="2">Output</th>
+        <th rowspan="2">Test</br>Status</th>
+    </tr>
+    <tr><th>Control</th>
+        <th>1:1</th>
+        <th>1:2</th>
+        <th>1:4</th>
+        <th>1:8</th>
+        <th>1:16</th>
+        <th>1:32</th>
+        <th>1:64</th>
+        <th>1:128</th>
+        <th>1:256</th>
+        <th>1:512</th>
+        <th>1:1024</th>
+        <th>Expected</th>
+        <th>Actual</th>
+    </tr>
+</table>
 </html>

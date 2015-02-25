@@ -91,8 +91,14 @@ window.addEventListener('load', function () {
         clearInputs();
     })();
 
+    document.getElementById("testsuccessstatus").onclick = function() {
+        var selfTestTable = document.getElementById("self_test_table");
+        selfTestTable.hidden = !selfTestTable.hidden;
+    }
+
     function runTests() {
-        var i, j, testcases, numFailures, testStartTime;
+        var i, j, testcases, numFailures, testStartTime, selfTestTable,
+            testPassed, tr, td;
 
         testStartTime = new Date();
 
@@ -101,6 +107,7 @@ window.addEventListener('load', function () {
             { control:  28, dilutions: [   0,   0, 0.1,   3,   6,  11,  14,  16,  20,  23,  22], sampleBU: "64.00" }
         ];
 
+        selfTestTable = document.getElementById("self_test_table");
         document.getElementById("testing").hidden = false;
         document.getElementById("loading").hidden = true;
 
@@ -114,31 +121,52 @@ window.addEventListener('load', function () {
 
             updateResults();
             if (sampleBUElem.innerHTML !== testcases[i].sampleBU) {
+                testPassed = false;
                 ++numFailures;
                 console.log("Test " + i + " failed - expected \"" +
                         testcases[i].sampleBU + "\", got \"" +
                         sampleBUElem.innerHTML + "\"");
+            } else {
+                testPassed = true;
             }
+            tr = document.createElement('tr');
+            selfTestTable.appendChild(tr);
+
+            td = document.createElement('td');
+            td.innerHTML = testcases[i].control;
+            tr.appendChild(td);
+            for (j = 0; j < dilutions.length; ++j) {
+                td = document.createElement('td');
+                td.innerHTML = testcases[i].dilutions[j];
+                tr.appendChild(td);
+            }
+            td = document.createElement('td');
+            td.innerHTML = testcases[i].sampleBU;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.innerHTML = sampleBUElem.innerHTML;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.innerHTML = testPassed ? "passed" : "failed";
+            tr.appendChild(td);
         }
 
-        document.getElementById("teststatus").innerHTML = numFailures + " / " +
-            testcases.length + " tests failed.";
-
         if (numFailures == 0) {
-            document.getElementById("testsuccessstatus").innerHTML = (
-                    "All " +
-                    testcases.length + " self tests passed " +
-                    testStartTime)
             document.getElementById("mainform").hidden = false;
         } else {
             document.getElementById("testsfailed").hidden = false;
+            selfTestTable.hidden = false;
         }
         document.getElementById("testing").hidden = true;
+        document.getElementById("testsuccessstatus").innerHTML = (
+                testcases.length - numFailures + " of " +
+                testcases.length + " self tests passed on " +
+                testStartTime);
 
         clearInputs();
-   }
+    }
 
-   runTests();
+    runTests();
 
 }, false);
 

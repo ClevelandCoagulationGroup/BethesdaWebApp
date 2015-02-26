@@ -52,13 +52,13 @@
     </table>
     <div id="testCalculations">
         <p class="resultLabel">Reference Dilution:</p>
-        <div id="closestDilution" class="calculationResult"> </div>
+        <div id="closestDilution" class="calculationResult"></div>
         <p class="equation">Dilution with residual activity closest to 50% and within the range 30%-70%</p>
         <p class="resultLabel">Bethesda Factor:</p>
-        <div id="bethesdaFactor" class="calculationResult"> </div>
+        <div id="bethesdaFactor" class="calculationResult"></div>
         <p class="equation">= log( (Residual Activity %) / 100% ) / log(2)</p>
         <p class="resultLabel">Sample Bethesda Units:</p>
-        <div id="sampleBU" class="calculationResult"> </div>
+        <div id="sampleBU" class="calculationResult"></div>
         <p class="equation">= (Bethesda factor) x (Dilution)</p>
     </div>
 </div>
@@ -66,7 +66,9 @@
 <span id="testsuccessstatus"></span>
 <table id="self_test_table" hidden="true">
     <tr><th colspan="12">Activity</th>
-        <th colspan="2">Output</th>
+        <th colspan="2">Closest Dilution</th>
+        <th colspan="2">Bethesda Factor</th>
+        <th colspan="2">Sample BU</th>
         <th rowspan="2">Test</br>Status</th>
     </tr>
     <tr><th>Control</th>
@@ -81,6 +83,10 @@
         <th>1:256</th>
         <th>1:512</th>
         <th>1:1024</th>
+        <th>Expected</th>
+        <th>Actual</th>
+        <th>Expected</th>
+        <th>Actual</th>
         <th>Expected</th>
         <th>Actual</th>
     </tr>

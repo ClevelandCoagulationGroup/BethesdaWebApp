@@ -6,6 +6,8 @@ window.addEventListener('load', function () {
         dilElems = [], // dilution HTML elements (INPUT tags)
         raElems = [],  // residual activity HTML elements (DIV tags)
         dilRows = [],  // table rows for each dilution
+        closestDilutionElem,  // dilution with RA closest to 50% (calculated)
+        bethesdaFactorElem,  // inhibitor in the dilute sample (calculated)
         sampleBUElem,  // final sample BU (calculated)
         selfTestTable, // table of self test results
         dateElem,      // date element (INPUT tag)
@@ -45,14 +47,18 @@ window.addEventListener('load', function () {
         }
 
         if (closestRAIndex != -1) {
-            var dilution, dilutionBU, sampleBU;
+            var closestDilution, dilutionBU, sampleBU;
 
-            dilution = dilutions[closestRAIndex];
-            dilutionBU = -Math.log(closestRAVal)/Math.log(2);
-            sampleBU = dilution * dilutionBU;
+            closestDilution = dilutions[closestRAIndex];
+            bethesdaFactor = -Math.log(closestRAVal)/Math.log(2);
+            sampleBU = closestDilution * bethesdaFactor;
 
+            closestDilutionElem.innerHTML = "1:" + closestDilution;
+            bethesdaFactorElem.innerHTML = bethesdaFactor.toFixed(2) + " BU/mL";
             sampleBUElem.innerHTML = sampleBU.toFixed(2) + " BU/mL";
         } else {
+            closestDilutionElem.innerHTML = "";
+            bethesdaFactorElem.innerHTML = "";
             sampleBUElem.innerHTML = "";
         }
 
@@ -82,7 +88,18 @@ window.addEventListener('load', function () {
         controlElem = document.getElementById('control');
         controlElem.oninput = updateResults;
 
+        closestDilutionElem = document.getElementById('closestDilution');
+        bethesdaFactorElem = document.getElementById('bethesdaFactor');
         sampleBUElem = document.getElementById('sampleBU');
+
+        dateElem = document.getElementById('date');
+
+        testSuccessStatusElem = document.getElementById('testsuccessstatus');
+        loadingDiv = document.getElementById('loading');
+        testingDiv = document.getElementById('testing');
+        testsFailedDiv = document.getElementById('testsfailed');
+        mainFormDiv = document.getElementById('mainform');
+        selfTestTable = document.getElementById("self_test_table");
 
         for (i = 0; i < dilutions.length; ++i) {
             var dilElem, raElem, dilRow;
@@ -96,13 +113,6 @@ window.addEventListener('load', function () {
             dilRow = document.getElementById('row' + dilutions[i]);
             dilRows.push(dilRow);
         }
-        dateElem = document.getElementById('date');
-        testSuccessStatusElem = document.getElementById('testsuccessstatus');
-        loadingDiv = document.getElementById('loading');
-        testingDiv = document.getElementById('testing');
-        testsFailedDiv = document.getElementById('testsfailed');
-        mainFormDiv = document.getElementById('mainform');
-        selfTestTable = document.getElementById("self_test_table");
 
         clearInputs();
     })();
@@ -118,9 +128,12 @@ window.addEventListener('load', function () {
         testStartTime = new Date();
 
         testcases = [
-            { control:  22, dilutions: [   0,   0, 0.1,   3,   6,  11,  14,  16,  20,  23,  22], sampleBU: "32.00 BU/mL" },
-            { control:  28, dilutions: [   0,   0, 0.1,   3,   6,  11,  14,  16,  20,  23,  22], sampleBU: "64.00 BU/mL" },
-            { control:  "", dilutions: [  "",  "",  "",  "",  "",  "",  "",  "",  "",  "",  ""], sampleBU: "" }
+            { control:  22, dilutions: [   0,   0, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
+                closestDilution: "1:32", bethesdaFactor: "1.00 BU/mL", sampleBU: "32.00 BU/mL" },
+            { control:  28, dilutions: [   0,   0, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
+                closestDilution: "1:64", bethesdaFactor: "1.00 BU/mL", sampleBU: "64.00 BU/mL" },
+            { control:  "", dilutions: [  "",  "",  "",  "",  "",  "",  "",  "",  "",  "",  ""],
+                closestDilution: "", bethesdaFactor: "", sampleBU: "" }
         ];
 
         testingDiv.hidden = false;
@@ -135,12 +148,12 @@ window.addEventListener('load', function () {
             }
 
             updateResults();
-            if (sampleBUElem.innerHTML !== testcases[i].sampleBU) {
+            if ((closestDilutionElem.innerHTML !== testcases[i].closestDilution) ||
+                (bethesdaFactorElem.innerHTML !== testcases[i].bethesdaFactor) ||
+                (sampleBUElem.innerHTML !== testcases[i].sampleBU) ) {
+
                 testPassed = false;
                 ++numFailures;
-                console.log("Test " + i + " failed - expected \"" +
-                        testcases[i].sampleBU + "\", got \"" +
-                        sampleBUElem.innerHTML + "\"");
             } else {
                 testPassed = true;
             }
@@ -155,6 +168,23 @@ window.addEventListener('load', function () {
                 td.innerHTML = testcases[i].dilutions[j];
                 tr.appendChild(td);
             }
+
+            td = document.createElement('td');
+            td.innerHTML = testcases[i].closestDilution;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.innerHTML = closestDilutionElem.innerHTML;
+            tr.appendChild(td);
+            td = document.createElement('td');
+
+            td = document.createElement('td');
+            td.innerHTML = testcases[i].bethesdaFactor;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.innerHTML = bethesdaFactorElem.innerHTML;
+            tr.appendChild(td);
+            td = document.createElement('td');
+
             td = document.createElement('td');
             td.innerHTML = testcases[i].sampleBU;
             tr.appendChild(td);
@@ -162,6 +192,7 @@ window.addEventListener('load', function () {
             td.innerHTML = sampleBUElem.innerHTML;
             tr.appendChild(td);
             td = document.createElement('td');
+
             td.innerHTML = testPassed ? "passed" : "failed";
             tr.appendChild(td);
         }

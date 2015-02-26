@@ -24,13 +24,14 @@
     <div class="patientLabelBox">
         <p>Place patient label here</p>
     </div>
+    Date:<input type="text" id="date"/>
     <div id="testInfo">
         <table>
             <tr><td>Patient Medical Record Number:</td><td><input type="text" id="MRN"/></td></tr>
-            <tr><td>Owren's Buffer Lot No. &amp; Exp:</td><td><input type="text" id="MRN"/></td></tr>
-            <tr><td>Precision PNP Lot No. &amp; Exp:</td><td><input type="text" id="MRN"/></td></tr>
-            <tr><td>Beckman FVIII Deficient Lot No. &amp; Exp:</td><td><input type="text" id="MRN"/></td></tr>
-            <tr><td>PTT Reagent Lot No. &amp; Exp:</td><td><input type="text" id="MRN"/></td></tr>
+            <tr><td>Owren's Buffer Lot No. &amp; Exp:</td><td><input type="text" id="buffer"/></td></tr>
+            <tr><td>Precision PNP Lot No. &amp; Exp:</td><td><input type="text" id="pnp"/></td></tr>
+            <tr><td>Beckman FVIII Deficient Lot No. &amp; Exp:</td><td><input type="text" id="fiiiDeficient"/></td></tr>
+            <tr><td>PTT Reagent Lot No. &amp; Exp:</td><td><input type="text" id="technologist"/></td></tr>
             <tr><td>Technologist:</td><td><input type="text" id="MRN"/></td></tr>
         </table>
     </div>
@@ -50,9 +51,16 @@
         <tr id="row1024"><td class="dilution">1:1024</td><td><input type="text" id="dil1024"/></td><td><div id="ra1024"/></td></tr>
     </table>
     <div id="testCalculations">
-    <p>Sample Bethesda Units: <div id="sampleBU"/></p>
+        <p class="resultLabel">Reference Dilution:</p>
+        <div id="closestDilution" class="calculationResult"> </div>
+        <p class="equation">Dilution with residual activity closest to 50% and within the range 30%-70%</p>
+        <p class="resultLabel">Bethesda Factor:</p>
+        <div id="bethesdaFactor" class="calculationResult"> </div>
+        <p class="equation">= log( (Residual Activity %) / 100% ) / log(2)</p>
+        <p class="resultLabel">Sample Bethesda Units:</p>
+        <div id="sampleBU" class="calculationResult"> </div>
+        <p class="equation">= (Bethesda factor) x (Dilution)</p>
     </div>
-</div>
 </div>
 <div id="selfTestInfo">
 <span id="testsuccessstatus"></span>
@@ -77,6 +85,7 @@
         <th>Actual</th>
     </tr>
 </table>
+</div>
 </div>
 </div>
 </body>

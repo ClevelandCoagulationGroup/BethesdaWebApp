@@ -44,7 +44,9 @@ window.addEventListener('load', function () {
             dilutionBU = -Math.log(closestRAVal)/Math.log(2);
             sampleBU = dilution * dilutionBU;
 
-            sampleBUElem.innerHTML = sampleBU.toFixed(2);
+            sampleBUElem.innerHTML = sampleBU.toFixed(2) + " BU/mL";
+        } else {
+            sampleBUElem.innerHTML = "";
         }
 
         for (i = 0; i < dilutions.length; ++i) {
@@ -103,8 +105,9 @@ window.addEventListener('load', function () {
         testStartTime = new Date();
 
         testcases = [
-            { control:  22, dilutions: [   0,   0, 0.1,   3,   6,  11,  14,  16,  20,  23,  22], sampleBU: "32.00" },
-            { control:  28, dilutions: [   0,   0, 0.1,   3,   6,  11,  14,  16,  20,  23,  22], sampleBU: "64.00" }
+            { control:  22, dilutions: [   0,   0, 0.1,   3,   6,  11,  14,  16,  20,  23,  22], sampleBU: "32.00 BU/mL" },
+            { control:  28, dilutions: [   0,   0, 0.1,   3,   6,  11,  14,  16,  20,  23,  22], sampleBU: "64.00 BU/mL" },
+            { control:  "", dilutions: [  "",  "",  "",  "",  "",  "",  "",  "",  "",  "",  ""], sampleBU: "" }
         ];
 
         selfTestTable = document.getElementById("self_test_table");

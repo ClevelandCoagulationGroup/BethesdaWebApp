@@ -36,7 +36,7 @@ table {
 }
 
 th {
-    padding-bottom:1ex;
+    padding-bottom:0.5ex;
     border: 1px solid #DFDFDF;
     padding-top: 1ex;
     padding-right: 1em;
@@ -84,7 +84,7 @@ input
 }
 
 #testInfo input {
-    width: 75mm;
+    width: 80mm;
 }
 
 tr.selected
@@ -120,7 +120,7 @@ tr.selected input
 
 #testCalculations {
     float: left;
-    max-width: 60mm;
+    max-width: 75mm;
 }
 
 #selfTestInfo {
@@ -131,5 +131,7 @@ tr.selected input
     border: 3px solid #DDD;
     font-weight: bold;
     font-size: 1.3em;
+    width: 10em;
+    height: 1.3em;
     padding: 0.5em;
 }

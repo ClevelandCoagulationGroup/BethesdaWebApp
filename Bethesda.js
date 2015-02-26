@@ -7,6 +7,13 @@ window.addEventListener('load', function () {
         raElems = [],  // residual activity HTML elements (DIV tags)
         dilRows = [],  // table rows for each dilution
         sampleBUElem,  // final sample BU (calculated)
+        selfTestTable, // table of self test results
+        dateElem,      // date element (INPUT tag)
+        testSuccessStatusElem, // message giving self-test results (DIV)
+        loadingDiv, // section of document with the testing message
+        testingDiv, // section of document with the testing message
+        testsFailedDiv, // section of document with tests-failed message
+        mainFormDiv, // section of document with the main form
         dilutions = [1,2,4,8,16,32,64,128,256,512,1024];
 
     function isNumeric(val) {
@@ -89,17 +96,23 @@ window.addEventListener('load', function () {
             dilRow = document.getElementById('row' + dilutions[i]);
             dilRows.push(dilRow);
         }
+        dateElem = document.getElementById('date');
+        testSuccessStatusElem = document.getElementById('testsuccessstatus');
+        loadingDiv = document.getElementById('loading');
+        testingDiv = document.getElementById('testing');
+        testsFailedDiv = document.getElementById('testsfailed');
+        mainFormDiv = document.getElementById('mainform');
+        selfTestTable = document.getElementById("self_test_table");
 
         clearInputs();
     })();
 
-    document.getElementById("testsuccessstatus").onclick = function() {
-        var selfTestTable = document.getElementById("self_test_table");
+    testSuccessStatusElem.onclick = function() {
         selfTestTable.hidden = !selfTestTable.hidden;
     }
 
     function runTests() {
-        var i, j, testcases, numFailures, testStartTime, selfTestTable,
+        var i, j, testcases, numFailures, testStartTime,
             testPassed, tr, td;
 
         testStartTime = new Date();
@@ -110,9 +123,8 @@ window.addEventListener('load', function () {
             { control:  "", dilutions: [  "",  "",  "",  "",  "",  "",  "",  "",  "",  "",  ""], sampleBU: "" }
         ];
 
-        selfTestTable = document.getElementById("self_test_table");
-        document.getElementById("testing").hidden = false;
-        document.getElementById("loading").hidden = true;
+        testingDiv.hidden = false;
+        loadingDiv.hidden = true;
 
         numFailures = 0;
 
@@ -155,13 +167,13 @@ window.addEventListener('load', function () {
         }
 
         if (numFailures == 0) {
-            document.getElementById("mainform").hidden = false;
+            mainFormDiv.hidden = false;
         } else {
-            document.getElementById("testsfailed").hidden = false;
+            testsFailedDiv.hidden = false;
             selfTestTable.hidden = false;
         }
-        document.getElementById("testing").hidden = true;
-        document.getElementById("testsuccessstatus").innerHTML = (
+        testingDiv.hidden = true;
+        testSuccessStatusElem.innerHTML = (
                 testcases.length - numFailures + " of " +
                 testcases.length + " self tests passed on " +
                 testStartTime);

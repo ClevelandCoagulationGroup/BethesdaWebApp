@@ -1,45 +1,38 @@
 @charset "UTF-8";
 
-/*body
-{
-    margin-right:auto;
-    margin-left:auto;
-    margin-top:1cm;
-    width:1000px;
-}*/
-
-body {
-    background-color: #506080;
-    background-image: linear-gradient(88deg, #607090, #506080 200px, #202040 1500px, #101020);
-    background-position: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-.mainColumn {
-    max-width: 210mm;
-    min-width: 300px;
-    margin: 0px auto;
-    background-color: white;
-    background-image: linear-gradient(90deg, #FFFFF8, #FCFCFC 70%, #F8F8FF);
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 20px;
-    padding-bottom: 60px;
+/* make the web page look like a printed page */
+@media screen {
+    body {
+        background-color: #506080;
+        background-image: linear-gradient(88deg, #E0E0E8, #D0D0DB 200px, #D0D0DB);
+        background-position: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-size: 100%;
+    }
+    .outerPage {
+        max-width: 8.5in;
+        margin: 0px auto;
+        background-color: white;
+        background-image: linear-gradient(90deg, #FFFFF8, #FCFCFC 70%, #F8F8FF);
+        padding-top: 25mm;
+        padding-bottom: 25mm;
+    }
+    .mainColumn {
+        max-width: 7in;
+        min-width: 300px;
+        margin: 0px auto;
+    }
 }
 
-#dilutions_table input
-{
-    width:4em;
+h1 {
+    font-size: 1.3em;
+    padding-bottom: 1em;
 }
 
 table {
     border-collapse: collapse;
     background-color: white;
-}
-
-td input
-{
-    text-align: center;
 }
 
 th {
@@ -54,6 +47,44 @@ td
 {
     border: 1px solid #DFDFDF;
     text-align: center;
+}
+
+input
+{
+    height: 1em;
+    font-size: 1.2em;
+}
+
+#dilutions_table input
+{
+    width:4em;
+    text-align: center;
+}
+
+.patientLabelBox {
+    border: 1px solid #DDD;
+    width: 4in;
+}
+
+.patientLabelBox p {
+    width: 4in;
+    height: 1in;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#testInfo {
+    padding: 2em 0px;
+}
+
+#testInfo td {
+    border: 0px;
+    text-align: right;
+}
+
+#testInfo input {
+    width: 75mm;
 }
 
 tr.selected
@@ -80,4 +111,25 @@ tr.selected input
 #self_test_table
 {
     border: 5px solid #DFDFDF;
+}
+
+#mainform table {
+    float: left;
+    margin: 1em 1em 1em 0px;
+}
+
+#testCalculations {
+    float: left;
+    max-width: 60mm;
+}
+
+#selfTestInfo {
+    clear: both;
+}
+
+#sampleBU {
+    border: 3px solid #DDD;
+    font-weight: bold;
+    font-size: 1.3em;
+    padding: 0.5em;
 }

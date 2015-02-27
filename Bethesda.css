@@ -17,11 +17,13 @@
         background-image: linear-gradient(90deg, #FFFFF8, #FCFCFC 70%, #F8F8FF);
         padding-top: 25mm;
         padding-bottom: 25mm;
+        height: auto;
     }
     .mainColumn {
         max-width: 7in;
         min-width: 300px;
         margin: 0px auto;
+        height: auto;
     }
     input {
         background-color: #F0FFFF;
@@ -89,6 +91,7 @@ input
 
 .equation {
     font-size: 0.6em;
+    font-weight: normal;
     color: #888;
     margin: 0.1em 0em 1em 0em;
 }
@@ -145,6 +148,12 @@ tr.selected input
 #mainForm table {
     float: left;
     margin: 1em 1em 1em 0px;
+}
+
+#testing {
+}
+
+#testsFailed {
 }
 
 #testCalculations {

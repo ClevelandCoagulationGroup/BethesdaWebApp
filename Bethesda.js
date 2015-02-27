@@ -1,3 +1,10 @@
+// Emulate addEventListener on older versions of Internet Explorer
+if (!window.addEventListener) {
+    window.addEventListener = function (eventType, callback) {
+        window.attachEvent('on' + eventType, callback);
+    }
+}
+
 // wait until the document has loaded
 window.addEventListener('load', function () {
     'use strict';
@@ -189,12 +196,27 @@ window.addEventListener('load', function () {
         // Fill in the current date
         today = new Date();
         dateElem.value = isoDate(today);
+
+        // Hide everything we don't want to show initially
+        mainFormDiv.style.display = 'none';
+        testsFailedDiv.style.display = 'none';
+        selfTestTable.style.display = 'none';
+
+        // Belt and suspenders: some older browsers have bugs where they
+        // don't fire an event when a text field changes.  Thus we'll update
+        // the calculations every 500ms just in case we missed a change in
+        // one of the inputs.
+        window.setInterval(updateResults, 500);
     })();
 
     // Make clicking on the self-test summary toggle the visibility of the
     // table of self-test results.
     testSuccessStatusElem.onclick = function() {
-        selfTestTable.hidden = !selfTestTable.hidden;
+        if (selfTestTable.style.display === 'block') {
+           selfTestTable.style.display = 'none';
+        } else {
+           selfTestTable.style.display = 'block';
+        }
     }
 
     // Run a series of integration self-tests to make sure entering a given
@@ -239,8 +261,8 @@ window.addEventListener('load', function () {
         ];
 
         // change the page the user sees from "loading" to "running tests"
-        testingDiv.hidden = false;
-        loadingDiv.hidden = true;
+        loadingDiv.style.display = 'block';
+        loadingDiv.style.display = 'none';
 
         // keep a count of how many tests failed
         numFailures = 0;
@@ -296,13 +318,13 @@ window.addEventListener('load', function () {
         if (numFailures == 0) {
             // The app seems to be working, and we can show the normal user
             // interface.
-            mainFormDiv.hidden = false;
+            mainFormDiv.style.display = 'block';
         } else {
             // Otherwise, show a failure message and the test results table
-            testsFailedDiv.hidden = false;
-            selfTestTable.hidden = false;
+            testsFailedDiv.style.display = 'block';
+            selfTestTable.style.display = 'block';
         }
-        testingDiv.hidden = true;
+        testingDiv.style.display = 'none';
 
         // Add a line verifying the tests were run.
         testSuccessStatusElem.innerHTML = (

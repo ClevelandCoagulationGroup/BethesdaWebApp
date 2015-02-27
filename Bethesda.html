@@ -20,7 +20,7 @@
     <h2>Self-test failed!</h2>
     <div id="teststatus"></div>
 </div>
-<div id="mainForm" hidden="true">
+<div id="mainForm">
     <div class="patientLabelBox">
         <p>Place patient label here</p>
     </div>
@@ -36,8 +36,9 @@
         </table>
     </div>
     <table id="dilutionsTable">
-        <tr><th>Dilution</th><th>Activity</th><th>% Residual Activity</th></tr>
-        <tr id="rowcontrol"><td>Control</td><td><input type="text" id="control"/></td><td>100%</td></tr>
+        <tr><th>Dilution</th><th>Activity</th><th rowspan=2>% Residual Activity
+                <p class="equation">= 100% &times; (Activity) /<br/> (Control Activity)</p></th></tr>
+        <tr id="rowcontrol"><td>Control</td><td><input type="text" id="control"/></td></tr>
         <tr id="row1"><td class="dilution">1:1</td><td><input type="text" id="dil1"/></td><td><div id="ra1"/></td></tr>
         <tr id="row2"><td class="dilution">1:2</td><td><input type="text" id="dil2"/></td><td><div id="ra2"/></td></tr>
         <tr id="row4"><td class="dilution">1:4</td><td><input type="text" id="dil4"/></td><td><div id="ra4"/></td></tr>
@@ -57,14 +58,14 @@
         <p class="resultLabel">Bethesda Factor:</p>
         <div id="bethesdaFactor" class="calculationResult"></div>
         <p class="equation">= log( (Residual Activity %) / 100% ) / log(2)</p>
-        <p class="resultLabel">Sample Bethesda Units:</p>
+        <p class="resultLabel">Factor VIII Inhibitor:</p>
         <div id="sampleBU" class="calculationResult"></div>
-        <p class="equation">= (Bethesda factor) x (Dilution)</p>
+        <p class="equation">= (Bethesda factor) &times; (Dilution)</p>
     </div>
 </div>
 <div id="selfTestInfo">
 <span id="testSuccessStatus"></span>
-<table id="selfTestTable" hidden="true">
+<table id="selfTestTable">
     <tr><th colspan="12">Activity</th>
         <th colspan="2">Closest Dilution</th>
         <th colspan="2">Bethesda Factor</th>

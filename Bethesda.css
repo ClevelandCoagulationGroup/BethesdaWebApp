@@ -58,12 +58,6 @@ input
     font-size: 1.2em;
 }
 
-#dilutionsTable input
-{
-    width:5em;
-    text-align: center;
-}
-
 .patientLabelBox {
     border: 1px solid #DDD;
     width: 4in;
@@ -77,6 +71,32 @@ input
     display: table-cell;
     text-align: center;
     vertical-align: middle;
+}
+
+.calculationResult {
+    border: 1px solid #DDD;
+    width: 50mm;
+    height: 1em;
+    padding: 2mm;
+    margin: 2px;
+    text-align: center;
+}
+
+.resultLabel {
+    padding: 0px;
+    margin: 1em 0em 0.3em 0em;
+}
+
+.equation {
+    font-size: 0.6em;
+    color: #888;
+    margin: 0.1em 0em 1em 0em;
+}
+
+#dilutionsTable input
+{
+    width:5em;
+    text-align: center;
 }
 
 #testInfo {
@@ -134,26 +154,6 @@ tr.selected input
 
 #selfTestInfo {
     clear: both;
-}
-
-.calculationResult {
-    border: 1px solid #DDD;
-    width: 50mm;
-    height: 1em;
-    padding: 2mm;
-    margin: 2px;
-    text-align: center;
-}
-
-.resultLabel {
-    padding: 0px;
-    margin: 1em 0em 0.3em 0em;
-}
-
-.equation {
-    font-size: 0.6em;
-    color: #888;
-    margin: 0.1em 0em 1em 0em;
 }
 
 #sampleBU {

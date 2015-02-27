@@ -36,12 +36,11 @@ h1 {
 
 table {
     border-collapse: collapse;
-    background-color: white;
 }
 
 th {
     padding-bottom:0.5ex;
-    border: 1px solid #DFDFDF;
+    border: 1px solid #DDD;
     padding-top: 1ex;
     padding-right: 0.5em;
     padding-left: 0.5em;
@@ -49,7 +48,7 @@ th {
 
 td
 {
-    border: 1px solid #DFDFDF;
+    border: 1px solid #DDD;
     text-align: center;
 }
 
@@ -59,7 +58,7 @@ input
     font-size: 1.2em;
 }
 
-#dilutions_table input
+#dilutionsTable input
 {
     width:5em;
     text-align: center;
@@ -96,7 +95,7 @@ input
 
 tr.selected
 {
-    background: #DFDFDF;
+    background: #DDD;
     font-weight: bold;
 }
 
@@ -105,22 +104,25 @@ tr.selected input
     font-weight: bold;
 }
 
-#testsuccessstatus
+#testSuccessStatus
 {
     color: gray;
 }
 
-#testsuccessstatus:hover
+#testSuccessStatus:hover
 {
     color: black;
 }
 
-#self_test_table
+#selfTestTable
 {
-    border: 5px solid #DFDFDF;
+    border: 5px solid #DDD;
+    float:left;
+    font-size: 0.8em;
+    background-color: white;
 }
 
-#mainform table {
+#mainForm table {
     float: left;
     margin: 1em 1em 1em 0px;
 }
@@ -140,6 +142,7 @@ tr.selected input
     height: 1em;
     padding: 2mm;
     margin: 2px;
+    text-align: center;
 }
 
 .resultLabel {

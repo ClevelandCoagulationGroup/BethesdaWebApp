@@ -38,7 +38,7 @@ window.addEventListener('load', function () {
     // Output a date in ISO 8601 format
     function isoDate(date) {
         return date.getFullYear() + "-" +
-            ZeroPad(date.getMonth()) + "-" +
+            ZeroPad(date.getMonth() + 1) + "-" +
             ZeroPad(date.getDate());
     }
 

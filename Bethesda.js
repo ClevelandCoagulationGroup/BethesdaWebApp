@@ -1,8 +1,10 @@
 // Emulate addEventListener on older versions of Internet Explorer
 if (!window.addEventListener) {
     window.addEventListener = function (eventType, callback) {
+        'use strict';
+
         window.attachEvent('on' + eventType, callback);
-    }
+    };
 }
 
 // wait until the document has loaded
@@ -23,11 +25,11 @@ window.addEventListener('load', function () {
         testingDiv, // section of document with the testing message
         testsFailedDiv, // section of document with tests-failed message
         mainFormDiv, // section of document with the main form
-        dilutions = [1,2,4,8,16,32,64,128,256,512,1024];
+        dilutions = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024];
 
     // Add leading zeros to the given value until it is 'width' digits wide
     // (width defaults to 2)
-    function ZeroPad(val, width) {
+    function zeroPad(val, width) {
         width = width || 2;
         while (String(val).length < 2) {
             val = '0' + String(val);
@@ -38,16 +40,16 @@ window.addEventListener('load', function () {
     // Output a date in ISO 8601 format
     function isoDate(date) {
         return date.getFullYear() + "-" +
-            ZeroPad(date.getMonth() + 1) + "-" +
-            ZeroPad(date.getDate());
+            zeroPad(date.getMonth() + 1) + "-" +
+            zeroPad(date.getDate());
     }
 
     // Output a date and time in ISO8601 format
     function isoDateTime(date) {
         return isoDate(date) + "T" +
-            ZeroPad(date.getHours()) + ":" +
-            ZeroPad(date.getMinutes()) + ":" +
-            ZeroPad(date.getSeconds());
+            zeroPad(date.getHours()) + ":" +
+            zeroPad(date.getMinutes()) + ":" +
+            zeroPad(date.getSeconds());
         // a time zone is recommended, but we're skipping that for now
     }
 
@@ -56,7 +58,7 @@ window.addEventListener('load', function () {
         return (
             /\S/.test(val) &&          // value is not just whitespace and
             !(isNaN(parseFloat(val)))  // can be converted to a number
-            );
+        );
     }
 
     // creates a new row for an HTML table with the given entries
@@ -67,7 +69,7 @@ window.addEventListener('load', function () {
         tableRow = document.createElement('tr');
 
         // for each entry we were given
-        for (i = 0; i < entries.length; ++i) {
+        for (i = 0; i < entries.length; i += 1) {
 
             // create the HTML for that entry
             tableDatum = document.createElement('td');
@@ -86,10 +88,14 @@ window.addEventListener('load', function () {
             ra, // relative activity
             idealRAVal = 0.5, // target relative activity
             closestRAVal = 0.29999999, // closest value so far
-            closestRAIndex = -1; // index of row with closest value, -1 = none
+            closestRAIndex = -1, // index of row with closest value, -1 = none
+            closestDilution,
+            bethesdaFactor,
+            sampleBU;
+
 
         // iterate over the rows
-        for (i = 0; i < dilutions.length; ++i) {
+        for (i = 0; i < dilutions.length; i += 1) {
             // if we have enough information to calculate the relative
             // activity...
             if (isNumeric(controlElem.value) && isNumeric(dilElems[i].value)) {
@@ -113,13 +119,11 @@ window.addEventListener('load', function () {
         }
 
         // If we found a row that was better than our starting 30%...
-        if (closestRAIndex != -1) {
-            var closestDilution, bethesdaFactor, sampleBU;
-
+        if (closestRAIndex !== -1) {
             // calculate our intermediate values and final result using that
             // row
             closestDilution = dilutions[closestRAIndex];
-            bethesdaFactor = -Math.log(closestRAVal)/Math.log(2);
+            bethesdaFactor = -Math.log(closestRAVal) / Math.log(2);
             sampleBU = closestDilution * bethesdaFactor;
 
             // update the values displayed on the form
@@ -136,8 +140,8 @@ window.addEventListener('load', function () {
 
         // highlight the row that was selected (if any), and unhighlight all
         // other rows.
-        for (i = 0; i < dilutions.length; ++i) {
-            if (i == closestRAIndex) {
+        for (i = 0; i < dilutions.length; i += 1) {
+            if (i === closestRAIndex) {
                 dilRows[i].className = "selected";
             } else {
                 dilRows[i].className = "";
@@ -149,7 +153,7 @@ window.addEventListener('load', function () {
     function clearInputs() {
         var i;
         controlElem.value = '';
-        for (i = 0; i < dilutions.length; ++i) {
+        for (i = 0; i < dilutions.length; i += 1) {
             dilElems[i].value = '';
         }
         updateResults();
@@ -157,7 +161,7 @@ window.addEventListener('load', function () {
 
     // initialization
     (function () {
-        var i, today;
+        var i, today, dilElem, raElem, dilRow;
 
         //
         // Locate all of the HTML elements we need and store them in
@@ -179,8 +183,7 @@ window.addEventListener('load', function () {
         mainFormDiv = document.getElementById('mainForm');
         selfTestTable = document.getElementById("selfTestTable");
 
-        for (i = 0; i < dilutions.length; ++i) {
-            var dilElem, raElem, dilRow;
+        for (i = 0; i < dilutions.length; i += 1) {
             dilElem = document.getElementById('dil' + dilutions[i]);
             dilElem.oninput = updateResults;
             dilElems.push(dilElem);
@@ -209,17 +212,17 @@ window.addEventListener('load', function () {
         // the calculations every 500ms just in case we missed a change in
         // one of the inputs.
         window.setInterval(updateResults, 500);
-    })();
+    }());
 
     // Make clicking on the self-test summary toggle the visibility of the
     // table of self-test results.
-    testSuccessStatusElem.onclick = function() {
+    testSuccessStatusElem.onclick = function () {
         if (selfTestTable.style.display === 'block') {
-           selfTestTable.style.display = 'none';
+            selfTestTable.style.display = 'none';
         } else {
-           selfTestTable.style.display = 'block';
+            selfTestTable.style.display = 'block';
         }
-    }
+    };
 
     // Run a series of integration self-tests to make sure entering a given
     // set of data in the activity column produces the expected output in
@@ -234,7 +237,7 @@ window.addEventListener('load', function () {
         // List of hand-generated set of inputs and expected outputs
         testcases = [
             // should choose the appropriate dilution
-            { control:0.04, dilutions:
+            { control: 0.04, dilutions:
                 [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
                 closestDilution:  "1:1", bethesdaFactor: "1.00 BU/mL",
                 sampleBU:  "1.00 BU/mL" },
@@ -290,11 +293,11 @@ window.addEventListener('load', function () {
         numFailures = 0;
 
         // for each of the tests...
-        for (i = 0; i < testcases.length; ++i) {
+        for (i = 0; i < testcases.length; i += 1) {
 
             // fill in the fields on the form
             controlElem.value = testcases[i].control;
-            for (j = 0; j < dilutions.length; ++j) {
+            for (j = 0; j < dilutions.length; j += 1) {
                 dilElems[j].value = testcases[i].dilutions[j];
             }
 
@@ -304,13 +307,13 @@ window.addEventListener('load', function () {
             // if any of the results are not the ones expected by the test
             if ((closestDilutionElem.innerHTML !==
                     testcases[i].closestDilution) ||
-                (bethesdaFactorElem.innerHTML !==
+                    (bethesdaFactorElem.innerHTML !==
                     testcases[i].bethesdaFactor) ||
-                (sampleBUElem.innerHTML !== testcases[i].sampleBU) ) {
+                    (sampleBUElem.innerHTML !== testcases[i].sampleBU)) {
 
                 // note the error, including increasing our error counter
                 testPassed = false;
-                ++numFailures;
+                numFailures += 1;
             } else {
                 testPassed = true;
             }
@@ -321,25 +324,25 @@ window.addEventListener('load', function () {
             // namely all of the inputs...
             testResultsRow = [];
             testResultsRow.push(testcases[i].control);
-            for (j = 0; j < dilutions.length; ++j) {
-                testResultsRow.push(testcases[i].dilutions[j])
+            for (j = 0; j < dilutions.length; j += 1) {
+                testResultsRow.push(testcases[i].dilutions[j]);
             }
             // ...expected and actual outputs...
-            testResultsRow.push(testcases[i].closestDilution)
-            testResultsRow.push(closestDilutionElem.innerHTML)
-            testResultsRow.push(testcases[i].bethesdaFactor)
-            testResultsRow.push(bethesdaFactorElem.innerHTML)
-            testResultsRow.push(testcases[i].sampleBU)
-            testResultsRow.push(sampleBUElem.innerHTML)
+            testResultsRow.push(testcases[i].closestDilution);
+            testResultsRow.push(closestDilutionElem.innerHTML);
+            testResultsRow.push(testcases[i].bethesdaFactor);
+            testResultsRow.push(bethesdaFactorElem.innerHTML);
+            testResultsRow.push(testcases[i].sampleBU);
+            testResultsRow.push(sampleBUElem.innerHTML);
             // ... and whether the test passed.
-            testResultsRow.push(testPassed ? "passed" : "failed")
+            testResultsRow.push(testPassed ? "passed" : "failed");
 
             // Then turn it into HTML and append it to the table
             selfTestTable.appendChild(createTableRow(testResultsRow));
         }
 
         // If all of the tests passed...
-        if (numFailures == 0) {
+        if (numFailures === 0) {
             // The app seems to be working, and we can show the normal user
             // interface.
             mainFormDiv.style.display = 'block';
@@ -352,9 +355,10 @@ window.addEventListener('load', function () {
 
         // Add a line verifying the tests were run.
         testSuccessStatusElem.innerHTML = (
-                testcases.length - numFailures + " of " +
-                testcases.length + " self tests passed on " +
-                isoDateTime(testStartTime));
+            testcases.length - numFailures + " of " +
+            testcases.length + " self tests passed on " +
+            isoDateTime(testStartTime)
+        );
 
         // Erase any inputs the tests may have left
         clearInputs();

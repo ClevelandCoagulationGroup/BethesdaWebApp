@@ -27,34 +27,67 @@
     Date:<input type="text" id="date"/>
     <div id="testInfo">
         <table>
-            <tr><td>Patient Medical Record Number:</td><td><input type="text" id="MRN"/></td></tr>
-            <tr><td>Owren's Buffer Lot No. &amp; Exp:</td><td><input type="text" id="buffer"/></td></tr>
-            <tr><td>Precision PNP Lot No. &amp; Exp:</td><td><input type="text" id="pnp"/></td></tr>
-            <tr><td>Beckman FVIII Deficient Lot No. &amp; Exp:</td><td><input type="text" id="fiiiDeficient"/></td></tr>
-            <tr><td>PTT Reagent Lot No. &amp; Exp:</td><td><input type="text" id="technologist"/></td></tr>
-            <tr><td>Technologist:</td><td><input type="text" id="MRN"/></td></tr>
+            <tr>
+                <td>Patient Medical Record Number:</td>
+                <td><input type="text" id="MRN"/></td></tr>
+            <tr><td>Owren's Buffer Lot No. &amp; Exp:</td>
+                <td><input type="text" id="buffer"/></td></tr>
+            <tr><td>Precision PNP Lot No. &amp; Exp:</td>
+                <td><input type="text" id="pnp"/></td></tr>
+            <tr><td>Beckman FVIII Deficient Lot No. &amp; Exp:</td>
+                <td><input type="text" id="fiiiDeficient"/></td></tr>
+            <tr><td>PTT Reagent Lot No. &amp; Exp:</td>
+                <td><input type="text" id="technologist"/></td></tr>
+            <tr><td>Technologist:</td>
+                <td><input type="text" id="MRN"/></td></tr>
         </table>
     </div>
     <table id="dilutionsTable">
-        <tr><th>Dilution</th><th>Activity</th><th rowspan=2>% Residual Activity
-                <p class="equation">= 100% &times; (Activity) /<br/> (Control Activity)</p></th></tr>
-        <tr id="rowcontrol"><td>Control</td><td><input type="text" id="control"/></td></tr>
-        <tr id="row1"><td class="dilution">1:1</td><td><input type="text" id="dil1"/></td><td><div id="ra1"/></td></tr>
-        <tr id="row2"><td class="dilution">1:2</td><td><input type="text" id="dil2"/></td><td><div id="ra2"/></td></tr>
-        <tr id="row4"><td class="dilution">1:4</td><td><input type="text" id="dil4"/></td><td><div id="ra4"/></td></tr>
-        <tr id="row8"><td class="dilution">1:8</td><td><input type="text" id="dil8"/></td><td><div id="ra8"/></td></tr>
-        <tr id="row16"><td class="dilution">1:16</td><td><input type="text" id="dil16"/></td><td><div id="ra16"/></td></tr>
-        <tr id="row32"><td class="dilution">1:32</td><td><input type="text" id="dil32"/></td><td><div id="ra32"/></td></tr>
-        <tr id="row64"><td class="dilution">1:64</td><td><input type="text" id="dil64"/></td><td><div id="ra64"/></td></tr>
-        <tr id="row128"><td class="dilution">1:128</td><td><input type="text" id="dil128"/></td><td><div id="ra128"/></td></tr>
-        <tr id="row256"><td class="dilution">1:256</td><td><input type="text" id="dil256"/></td><td><div id="ra256"/></td></tr>
-        <tr id="row512"><td class="dilution">1:512</td><td><input type="text" id="dil512"/></td><td><div id="ra512"/></td></tr>
-        <tr id="row1024"><td class="dilution">1:1024</td><td><input type="text" id="dil1024"/></td><td><div id="ra1024"/></td></tr>
+        <tr><th>Dilution</th><th>Activity</th>
+            <th rowspan=2>% Residual Activity
+                <p class="equation">= 100% &times; (Activity) /<br/>
+                (Control Activity)</p></th></tr>
+        <tr id="rowcontrol"><td>Control</td>
+            <td><input type="text" id="control"/></td></tr>
+        <tr id="row1"><td class="dilution">1:1</td>
+            <td><input type="text" id="dil1"/></td>
+            <td><div id="ra1"/></td></tr>
+        <tr id="row2"><td class="dilution">1:2</td>
+            <td><input type="text" id="dil2"/></td>
+            <td><div id="ra2"/></td></tr>
+        <tr id="row4"><td class="dilution">1:4</td>
+            <td><input type="text" id="dil4"/></td>
+            <td><div id="ra4"/></td></tr>
+        <tr id="row8"><td class="dilution">1:8</td>
+            <td><input type="text" id="dil8"/></td>
+            <td><div id="ra8"/></td></tr>
+        <tr id="row16"><td class="dilution">1:16</td>
+            <td><input type="text" id="dil16"/></td>
+            <td><div id="ra16"/></td></tr>
+        <tr id="row32"><td class="dilution">1:32</td>
+            <td><input type="text" id="dil32"/></td>
+            <td><div id="ra32"/></td></tr>
+        <tr id="row64"><td class="dilution">1:64</td>
+            <td><input type="text" id="dil64"/></td>
+            <td><div id="ra64"/></td></tr>
+        <tr id="row128"><td class="dilution">1:128</td>
+            <td><input type="text" id="dil128"/></td>
+            <td><div id="ra128"/></td></tr>
+        <tr id="row256"><td class="dilution">1:256</td>
+            <td><input type="text" id="dil256"/></td>
+            <td><div id="ra256"/></td></tr>
+        <tr id="row512"><td class="dilution">1:512</td>
+            <td><input type="text" id="dil512"/></td>
+            <td><div id="ra512"/></td></tr>
+        <tr id="row1024"><td class="dilution">1:1024</td>
+            <td><input type="text" id="dil1024"/></td>
+            <td><div id="ra1024"/></td></tr>
     </table>
     <div id="testCalculations">
         <p class="resultLabel">Reference Dilution:</p>
         <div id="closestDilution" class="calculationResult"></div>
-        <p class="equation">Dilution with residual activity closest to 50% and within the range 30%-70%</p>
+        <p class="equation">Dilution with residual activity closest to 50%
+            and within the range 30%-70%</p>
         <p class="resultLabel">Bethesda Factor:</p>
         <div id="bethesdaFactor" class="calculationResult"></div>
         <p class="equation">= log( (Residual Activity %) / 100% ) / log(2)</p>

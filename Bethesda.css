@@ -4,7 +4,8 @@
 @media screen {
     body {
         background-color: #506080;
-        background-image: linear-gradient(88deg, #E0E0E8, #D0D0DB 200px, #D0D0DB);
+        background-image: linear-gradient(88deg, #E0E0E8, #D0D0DB 200px,
+            #D0D0DB);
         background-position: center;
         padding-top: 20px;
         padding-bottom: 20px;
@@ -14,7 +15,8 @@
         max-width: 8.5in;
         margin: 0px auto;
         background-color: white;
-        background-image: linear-gradient(90deg, #FFFFF8, #FCFCFC 70%, #F8F8FF);
+        background-image: linear-gradient(90deg, #FFFFF8, #FCFCFC 70%,
+            #F8F8FF);
         padding-top: 25mm;
         padding-bottom: 25mm;
         height: auto;

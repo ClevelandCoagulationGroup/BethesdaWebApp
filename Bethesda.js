@@ -100,7 +100,8 @@ window.addEventListener('load', function () {
 
                 // if it's closer to 50% than our best row so far, choose
                 // this row as our best row to date.
-                if (Math.abs(ra - idealRAVal) < Math.abs(closestRAVal - idealRAVal)) {
+                if (Math.abs(ra - idealRAVal) <
+                        Math.abs(closestRAVal - idealRAVal)) {
                     closestRAVal = ra;
                     closestRAIndex = i;
                 }
@@ -123,7 +124,8 @@ window.addEventListener('load', function () {
 
             // update the values displayed on the form
             closestDilutionElem.innerHTML = "1:" + closestDilution;
-            bethesdaFactorElem.innerHTML = bethesdaFactor.toFixed(2) + " BU/mL";
+            bethesdaFactorElem.innerHTML =
+                bethesdaFactor.toFixed(2) + " BU/mL";
             sampleBUElem.innerHTML = sampleBU.toFixed(2) + " BU/mL";
         } else {
             // clear the values displayed on the form
@@ -229,35 +231,55 @@ window.addEventListener('load', function () {
         // record the time the tests were run
         testStartTime = new Date();
 
-        // List a hand-generated set of inputs and expected outputs
+        // List of hand-generated set of inputs and expected outputs
         testcases = [
             // should choose the appropriate dilution
-            { control:0.04, dilutions: [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
-                closestDilution:  "1:1", bethesdaFactor: "1.00 BU/mL", sampleBU:  "1.00 BU/mL" },
-            { control: 0.1, dilutions: [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
-                closestDilution:  "1:2", bethesdaFactor: "1.00 BU/mL", sampleBU:  "2.00 BU/mL" },
-            { control: 0.2, dilutions: [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
-                closestDilution:  "1:4", bethesdaFactor: "1.00 BU/mL", sampleBU:  "4.00 BU/mL" },
-            { control:   6, dilutions: [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
-                closestDilution:  "1:8", bethesdaFactor: "1.00 BU/mL", sampleBU:  "8.00 BU/mL" },
-            { control:  12, dilutions: [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
-                closestDilution: "1:16", bethesdaFactor: "1.00 BU/mL", sampleBU: "16.00 BU/mL" },
-            { control:  22, dilutions: [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
-                closestDilution: "1:32", bethesdaFactor: "1.00 BU/mL", sampleBU: "32.00 BU/mL" },
-            { control:  28, dilutions: [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
-                closestDilution: "1:64", bethesdaFactor: "1.00 BU/mL", sampleBU: "64.00 BU/mL" },
+            { control:0.04, dilutions:
+                [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
+                closestDilution:  "1:1", bethesdaFactor: "1.00 BU/mL",
+                sampleBU:  "1.00 BU/mL" },
+            { control: 0.1, dilutions:
+                [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
+                closestDilution:  "1:2", bethesdaFactor: "1.00 BU/mL",
+                sampleBU:  "2.00 BU/mL" },
+            { control: 0.2, dilutions:
+                [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
+                closestDilution:  "1:4", bethesdaFactor: "1.00 BU/mL",
+                sampleBU:  "4.00 BU/mL" },
+            { control:   6, dilutions:
+                [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
+                closestDilution:  "1:8", bethesdaFactor: "1.00 BU/mL",
+                sampleBU:  "8.00 BU/mL" },
+            { control:  12, dilutions:
+                [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
+                closestDilution: "1:16", bethesdaFactor: "1.00 BU/mL",
+                sampleBU: "16.00 BU/mL" },
+            { control:  22, dilutions:
+                [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
+                closestDilution: "1:32", bethesdaFactor: "1.00 BU/mL",
+                sampleBU: "32.00 BU/mL" },
+            { control:  28, dilutions:
+                [ 0.02, 0.05, 0.1,   3,   6,  11,  14,  16,  20,  23,  22],
+                closestDilution: "1:64", bethesdaFactor: "1.00 BU/mL",
+                sampleBU: "64.00 BU/mL" },
 
             // should clear the results when the inputs are empty
-            { control:  "", dilutions: [  "",  "",  "",  "",  "",  "",  "",  "",  "",  "",  ""],
-                closestDilution: "", bethesdaFactor: "", sampleBU: "" },
+            { control:  "", dilutions:
+                [   "",   "",  "",  "",  "",  "",  "",  "",  "",  "",  ""],
+                closestDilution: "", bethesdaFactor: "",
+                sampleBU: "" },
 
             // should handle non-monotonic values
-            { control:  28, dilutions: [ 0.02, 0.01, 0.02,  3,   2,  11,  14,  16,  28,  30,  28],
-                closestDilution: "1:64", bethesdaFactor: "1.00 BU/mL", sampleBU: "64.00 BU/mL" },
+            { control:  28, dilutions:
+                [ 0.02, 0.01, 0.02,  3,   2,  11,  14,  16,  28,  30,  28],
+                closestDilution: "1:64", bethesdaFactor: "1.00 BU/mL",
+                sampleBU: "64.00 BU/mL" },
 
             // should pick the lower value in a tie
-            { control:   6, dilutions: [ 0.02, 0.05, 0.1,   3,   3,   6,  11,  14,  16,  20,  23],
-                closestDilution:  "1:8", bethesdaFactor: "1.00 BU/mL", sampleBU:  "8.00 BU/mL" }
+            { control:   6, dilutions:
+                [ 0.02, 0.05, 0.1,   3,   3,   6,  11,  14,  16,  20,  23],
+                closestDilution:  "1:8", bethesdaFactor: "1.00 BU/mL",
+                sampleBU:  "8.00 BU/mL" }
         ];
 
         // change the page the user sees from "loading" to "running tests"
@@ -280,8 +302,10 @@ window.addEventListener('load', function () {
             updateResults();
 
             // if any of the results are not the ones expected by the test
-            if ((closestDilutionElem.innerHTML !== testcases[i].closestDilution) ||
-                (bethesdaFactorElem.innerHTML !== testcases[i].bethesdaFactor) ||
+            if ((closestDilutionElem.innerHTML !==
+                    testcases[i].closestDilution) ||
+                (bethesdaFactorElem.innerHTML !==
+                    testcases[i].bethesdaFactor) ||
                 (sampleBUElem.innerHTML !== testcases[i].sampleBU) ) {
 
                 // note the error, including increasing our error counter

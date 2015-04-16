@@ -148,6 +148,10 @@ tr.selected input
     display: none;
 }
 
+#factor {
+    width: 1em;
+}
+
 #mainForm {
     display: none;
 }
@@ -182,5 +186,5 @@ tr.selected input
 }
 
 #date {
-    width: 8em;
+    width: 6em;
 }

@@ -9,7 +9,7 @@
 <body>
 <div class="outerPage">
 <div class="mainColumn">
-<h1>Bethesda Assay for Specific Factor VIII Inhibitors</h1>
+<h1>Bethesda Assay for Specific Inhibitors</h1>
 <div id="loading">
     <h2>Loading application...</h2>
 </div>
@@ -24,22 +24,27 @@
     <div class="patientLabelBox">
         <p>Place patient label here</p>
     </div>
-    Date:<input type="text" id="date"/>
+    Testing Date:<input type="text" id="date"/>
     <div id="testInfo">
         <table>
             <tr>
                 <td>Patient Medical Record Number:</td>
                 <td><input type="text" id="MRN"/></td></tr>
-            <tr><td>Owren's Buffer Lot No. &amp; Exp:</td>
+            <tr><td>Buffer Reagent Name, Lot No. &amp; Exp:</td>
                 <td><input type="text" id="buffer"/></td></tr>
-            <tr><td>Precision PNP Lot No. &amp; Exp:</td>
+            <tr><td>PNP Reagent Name, Lot No. &amp; Exp:</td>
                 <td><input type="text" id="pnp"/></td></tr>
-            <tr><td>Beckman FVIII Deficient Lot No. &amp; Exp:</td>
+            <tr><td>Deficient Plasma Reagent Name, Lot No. &amp; Exp:</td>
                 <td><input type="text" id="fiiiDeficient"/></td></tr>
-            <tr><td>aPTT Reagent Lot No. &amp; Exp:</td>
-                <td><input type="text" id="pttReagent"/></td></tr>
+            <tr><td>aPTT Reagent Name, Lot No. &amp; Exp:</td>
+                <td><input type="text" id="apttReagent"/></td></tr>
             <tr><td>Technologist:</td>
                 <td><input type="text" id="technologist"/></td></tr>
+            <tr><td>Factor:</td>
+                <td><input type="text" id="factor"/></td></tr>
+            <tr><td>Factor activity (%):</td>
+                <td><input type="text" id="factorActivity"/></td></tr>
+            <tr><th colspan=2>Note: to perform this assay factor activity must be less than 20%</th></tr>
         </table>
     </div>
     <table id="dilutionsTable">
@@ -88,10 +93,10 @@
         <div id="closestDilution" class="calculationResult"></div>
         <p class="equation">Dilution with residual activity closest to 50%
             and within the range 30%-70%</p>
-        <p class="resultLabel">Bethesda Factor:</p>
+        <p class="resultLabel">Bethesda Factor (BU/mL):</p>
         <div id="bethesdaFactor" class="calculationResult"></div>
         <p class="equation">= log( (Residual Activity %) / 100% ) / log(2)</p>
-        <p class="resultLabel">Factor VIII Inhibitor:</p>
+        <p class="resultLabel">Factor Inhibitor (BU/mL):</p>
         <div id="sampleBU" class="calculationResult"></div>
         <p class="equation">= (Bethesda factor) &times; (Dilution)</p>
     </div>

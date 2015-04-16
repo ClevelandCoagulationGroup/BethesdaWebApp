@@ -145,6 +145,11 @@ tr.selected input
     float:left;
     font-size: 0.8em;
     background-color: white;
+    display: none;
+}
+
+#mainForm {
+    display: none;
 }
 
 #mainForm table {
@@ -153,9 +158,11 @@ tr.selected input
 }
 
 #testing {
+    display: none;
 }
 
 #testsFailed {
+    display: none;
 }
 
 #testCalculations {
